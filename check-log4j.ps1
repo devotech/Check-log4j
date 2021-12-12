@@ -1,8 +1,8 @@
-$prefix = Read-host "Enter used prefix for all servers"
-$computerNames = @(get-adcomputer -Filter { OperatingSystem -Like '*Windows Server*' -and name -like "$prefix*" } )
+#$prefix = Read-host "Enter used prefix for all servers"
+$computerNames = @(get-adcomputer -Filter { OperatingSystem -Like '*Windows Server*'}) # -and name -like "$prefix*" } )
 $ignoreDrives = @("A", "B" ) # A and B not relevant, D is temp drive of Azure VMs
 $keyword = "*log4j-*.jar"
-$logfile = "\\$server\$path\log4j-servercheck-$prefix.log"
+$logfile = "\\$server\$path\log4j-servercheck.log"
 
 Start-Transcript -Path $logfile -NoClobber
 
