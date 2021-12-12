@@ -1,8 +1,15 @@
-#$prefix = Read-host "Enter used prefix for all servers"
-$computerNames = @(get-adcomputer -Filter { OperatingSystem -Like '*Windows Server*'}) # -and name -like "$prefix*" } )
+$prefix = Read-host "Enter used prefix for all servers"
+$computerNames = @(get-adcomputer -Filter { OperatingSystem -Like '*Windows Server*' } -Properties * |  where { ($_.Name -like "$prefix*" )} | Select name )
 $ignoreDrives = @("A", "B" ) # A and B not relevant, D is temp drive of Azure VMs
 $keyword = "*log4j-*.jar"
-$logfile = "\\$server\$path\log4j-servercheck.log"
+$server = Read-Host "Enter server to store logfile"
+$path = Read-Host "Enter share to store logfile"
+$logfile = "\\$server\$path\log4j-servercheck.log-$prefix"
+
+If(!(test-path \\$server\$path))
+{
+      New-Item -ItemType Directory -Force -Path \\$server\$path
+}
 
 Start-Transcript -Path $logfile -NoClobber
 
@@ -27,3 +34,10 @@ foreach ($computer in $computerNames) {
 }
 
 Stop-Transcript
+
+<#
+
+This is a quick script, don't expect it to be too neat.
+It should work for it's intended purpose, readability may be a bit harsh.
+
+#>
