@@ -12,10 +12,16 @@ find . -name log4j-*.jar
 ## Example
 
 customer: 'Contoso'
+
 server naming scheme: 'Con-$svrXY'
+
 use prefix: 'Con-'
 
+
 If you want to split the scan into mulitple logs or have several naming schemes, run several instances simultaneously.
+
 Examples:
+
 prefix: 'Con-fil'
+
 prefix: 'Con-app'
