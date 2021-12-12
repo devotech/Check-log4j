@@ -1,7 +1,7 @@
 $prefix = Read-host "Enter used prefix for all servers"
 $computerNames = @(get-adcomputer -Filter { OperatingSystem -Like '*Windows Server*' } -Properties * |  where { ($_.Name -like "$prefix*" )} | Select name )
 $ignoreDrives = @("A", "B" ) # A and B not relevant, D is temp drive of Azure VMs
-$keyword = "*log4j-*.jar"
+$keyword = "*log4j-core-*.jar"
 $server = Read-Host "Enter server to store logfile"
 $path = Read-Host "Enter share to store logfile"
 $logfile = "\\$server\$path\log4j-servercheck.log-$prefix"
