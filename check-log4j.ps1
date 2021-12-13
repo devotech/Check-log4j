@@ -4,7 +4,7 @@ $ignoreDrives = @("A", "B" ) # A and B not relevant, D is temp drive of Azure VM
 $keyword = "*log4j-*.jar"
 $server = Read-Host "Enter server to store logfile"
 $path = Read-Host "Enter share to store logfile"
-$logfile = "\\$server\$path\log4j-servercheck.log-$prefix"
+$logfile = "\\$server\$path\log4j-servercheck-$prefix.log"
 
 If(!(test-path \\$server\$path))
 {
