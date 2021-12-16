@@ -42,4 +42,17 @@ prefix: 'Con-app'
 # Linux
 to check linux servers, you can use the follwing query in terminal: - go to / first.
 
-'find . -name log4j-*.jar'
+```
+find / -name log4j-*.jar
+```
+
+To check jar files if they have log4j included type the following (this may take a while...):
+
+```
+sudo find / -name \*.jar \
+	-exec sh -c \
+	"if zipinfo {} | grep JndiLookup.class; \
+	 then \
+	     echo -e '{}\n'; \n
+	 fi" \; 2>/dev/null
+```
